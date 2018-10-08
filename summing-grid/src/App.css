@@ -1,5 +1,9 @@
-.App {
+.App-grid {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 4em;
 }
 
 .App-header {
@@ -13,6 +17,21 @@
   font-size: 1.5em;
 }
 
-.App-intro {
-  font-size: large;
+.App-cell {
+  width: 3em;
+  height: 3em;
+  border: 1px solid #000;
+  border-radius: 0.25em;
+  margin: auto;
+}
+
+.App-input {
+  width: 3em;
+  height: 3em;
+  border: none;
+  text-align: center;
+}
+
+.App-cell.result, .App-cell.result input {
+  background-color: #eee;
 }
