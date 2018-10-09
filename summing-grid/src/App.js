@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 
+const numeral = require('numeral');
+
 class App extends Component {
   render() {
     return (
@@ -29,8 +31,6 @@ class Grid extends Component {
 
     this.setState({sum: sum});
 
-    console.log('parent sum',sum)
-
     return sum;
   }
 
@@ -58,24 +58,21 @@ class Cell extends Component {
   constructor(props) {
     super(props);
     this.index = props.index;
-    this.state = {sum: ''};
+    this.state = {sum: 0};
   }
 
   handleChange(event) {
     this.setState({sum: event.target.value});
     this.props.onValueChange(event.target.value,this.index);
-    console.log('chaging!',this.props.onValueChange());
   }
 
   render() {
     return <div className="App-cell">
       <input type="text" className="App-input" value={this.state.value}
   onChange={this.handleChange.bind(this)}/>
-    </div>
+      </div>
   }
 }
-
-
 
 class Result extends Cell {
   constructor(props) {
@@ -84,14 +81,28 @@ class Result extends Cell {
   }
 
   componentWillReceiveProps(props) {
-    console.log(props);
-    this.setState({sum: props.sum})
+    this.formatNumber(props.sum);
+    this.setState({sum: props.sum});
+
   }
 
+  formatNumber = (val) => {
+    val = numeral(val).format('0.00a');
+    let size = val.replace(/[0-9.]/g, '');
+    let value = Number(val.replace(/[a-zA-Z]/g, ''));
+    let num = Math.round(value*100) / 100;
+
+    return num + size;
+
+  }
+
+
   render() {
+
     return <div className="App-cell result">
-          <input type="text" className="App-input" disabled value={this.state.sum} />
-        </div>
+            <input type="text" className="App-input" disabled value={this.formatNumber(this.state.sum)} />
+          </div>
   }
 }
+
 export default App;

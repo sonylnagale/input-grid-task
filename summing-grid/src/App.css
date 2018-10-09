@@ -3,35 +3,49 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 4em;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
+  height: 100%;
+  width: 100%;
 }
 
 .App-cell {
-  width: 3em;
-  height: 3em;
+  width: calc(25% - 2px);
+  height: 10em;
   border: 1px solid #000;
-  border-radius: 0.25em;
   margin: auto;
 }
 
 .App-input {
-  width: 3em;
-  height: 3em;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
   border: none;
   text-align: center;
 }
 
-.App-cell.result, .App-cell.result input {
+.App-cell.result {
   background-color: #eee;
+  vertical-align: middle;
+}
+
+
+@media screen and (max-width: 720px) {
+  .App-cell {
+    width: calc(50% - 2px);
+    height: 10em;
+    border: 1px solid #000;
+    margin: auto;
+  }
+
+  .App-input {
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+    border: none;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .App-grid {
+    flex-direction: column;
+  }
+
 }
